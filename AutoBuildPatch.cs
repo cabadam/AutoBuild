@@ -32,7 +32,7 @@ namespace AutoBuild
         {
             AutoBuildPlugin.AutoBuildFlag = false;
             AutoBuildPlugin.PowerFlag = 0;
-            string text = "自动建造模式结束";
+            string text = "End of automatic construction mode";
             if (extraTip != null)
                 text = text + "-" + extraTip;
             UIRealtimeTip.Popup(text);
@@ -56,13 +56,13 @@ namespace AutoBuild
             switch (AutoBuildPlugin.PowerFlag)
             {
                 case 0:
-                    AutoBuildPatch.modText.text = "自动建造模式";
+                    AutoBuildPatch.modText.text = "Automatic build mode";
                     break;
                 case 1:
-                    AutoBuildPatch.modText.text = "正在寻找充电站...";
+                    AutoBuildPatch.modText.text = "Looking for a charging station...";
                     break;
                 case 2:
-                    AutoBuildPatch.modText.text = "正在充电...";
+                    AutoBuildPatch.modText.text = "Charging...";
                     break;
             }
         }
@@ -138,12 +138,12 @@ namespace AutoBuild
             if (!AutoBuildPlugin.AutoBuild.Value || !AutoBuildPlugin.AutoBuildFlag)
                 return;
             if ((bool)VFInput._moveForward || (bool)VFInput._moveBackward || (bool)VFInput._moveLeft || (bool)VFInput._moveRight || VFInput.alt)
-                AutoBuildPatch.ExitAutoBuild("玩家移动");
+                AutoBuildPatch.ExitAutoBuild("Player Movement");
             else if (AutoBuildPlugin.player.movementState != EMovementState.Fly && AutoBuildPlugin.PowerFlag == 0 && !AutoBuildPlugin.WalkBuild.Value || AutoBuildPlugin.player.movementState == EMovementState.Sail)
-                AutoBuildPatch.ExitAutoBuild("退出飞行");
+                AutoBuildPatch.ExitAutoBuild("Exit flight");
             else if (UIGame.viewMode == EViewMode.Build)
             {
-                AutoBuildPatch.ExitAutoBuild("进入手动建造模式");
+                AutoBuildPatch.ExitAutoBuild("Enter manual build mode");
             }
             else
             {
@@ -187,7 +187,7 @@ namespace AutoBuild
                                 AutoBuildPlugin.logger.LogInfo((object)"PowerCharger(0)...");
                                 return;
                             }
-                            AutoBuildPatch.ExitAutoBuild("能量过低");
+                            AutoBuildPatch.ExitAutoBuild("Energy too low");
                             return;
                         }
                     }

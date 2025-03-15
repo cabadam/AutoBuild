@@ -31,17 +31,16 @@ namespace AutoBuild
         {
             AutoBuildPlugin.logger = this.Logger;
             new Harmony("kumor.plugin.AutoBuild").PatchAll(typeof(AutoBuildPatch));
-            AutoBuildPlugin.AutoBuild = this.Config.Bind<bool>("自动建造", "是否开启自动建造", true, new ConfigDescription("是否开启自动建造", (AcceptableValueBase)null, new object[0]));
-            AutoBuildPlugin.AutoPowerCharger = this.Config.Bind<bool>("自动建造", "是否开启自动充电", true, new ConfigDescription("是否开启自动充电", (AcceptableValueBase)null, new object[0]));
-            AutoBuildPlugin.PowerPer = this.Config.Bind<float>("自动建造", "充电下限百分比", 0.3f, new ConfigDescription("充电下限百分比", (AcceptableValueBase)new AcceptableValueRange<float>(0.1f, 0.99f), new object[0]));
-            AutoBuildPlugin.PowerChargerDt = this.Config.Bind<float>("自动建造", "充电站充电距离", 5.5f, new ConfigDescription("充电站充电距离", (AcceptableValueBase)new AcceptableValueRange<float>(3f, 30f), new object[0]));
-            AutoBuildPlugin.droneEject = this.Config.Bind<bool>("自动建造", "建造无人机", true, new ConfigDescription("开启关闭建造无人机", (AcceptableValueBase)null, new object[0]));
-            AutoBuildPlugin.WalkBuild = this.Config.Bind<bool>("自动建造", "步行建造模式", false, new ConfigDescription("开启关闭步行建造模式", (AcceptableValueBase)null, new object[0]));
+            AutoBuildPlugin.AutoBuild = this.Config.Bind<bool>("自动建造", "是否开启自动建造", true, new ConfigDescription("Whether to enable automatic construction", (AcceptableValueBase)null, new object[0]));
+            AutoBuildPlugin.AutoPowerCharger = this.Config.Bind<bool>("自动建造", "是否开启自动充电", true, new ConfigDescription("Whether to enable automatic charging", (AcceptableValueBase)null, new object[0]));
+            AutoBuildPlugin.PowerPer = this.Config.Bind<float>("自动建造", "充电下限百分比", 0.3f, new ConfigDescription("the lower limit percentage of charging when automatic charging is enabled", (AcceptableValueBase)new AcceptableValueRange<float>(0.1f, 0.99f), new object[0]));
+            AutoBuildPlugin.PowerChargerDt = this.Config.Bind<float>("自动建造", "充电站充电距离", 5.5f, new ConfigDescription("Charging station charging distance", (AcceptableValueBase)new AcceptableValueRange<float>(3f, 30f), new object[0]));
+            AutoBuildPlugin.droneEject = this.Config.Bind<bool>("自动建造", "建造无人机", true, new ConfigDescription("Turn construction drone on and off", (AcceptableValueBase)null, new object[0]));
+            AutoBuildPlugin.WalkBuild = this.Config.Bind<bool>("自动建造", "步行建造模式", false, new ConfigDescription("Limit construction to walking only", (AcceptableValueBase)null, new object[0]));
         }
 
         private void Start()
         {
-            AutoBuildPlugin.logger.LogInfo((object)("Custom autobuild starting up!"));
         }
 
         private void Update()
@@ -68,7 +67,7 @@ namespace AutoBuild
                 AutoBuildPatch.ExitAutoBuild();
             else if (!AutoBuildPlugin.WalkBuild.Value)
                 AutoBuildPatch.Fly();
-            AutoBuildPlugin.logger.LogInfo((object)("AutoBuildFlag: " + AutoBuildPlugin.AutoBuildFlag.ToString() + "  KeyCode.Z"));
+            AutoBuildPlugin.logger.LogInfo((object)("AutoBuildFlag: " + AutoBuildPlugin.AutoBuildFlag.ToString() + "  KeyCode.N"));
         }
 
         private void OnDestroy()
